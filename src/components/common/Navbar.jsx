@@ -29,8 +29,9 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn bg-white text-yellow-700">Login</a>
-      </div>
+        <a className="btn bg-white text-yellow-700">Login</a> 
+      </div> 
+      {/* To do: Navbar will be show profile pic instead of login btn if user is logged in */}
     </div>
   );
 };
