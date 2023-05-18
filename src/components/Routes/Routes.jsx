@@ -5,6 +5,7 @@ import AllToys from "../toys/AllToys";
 import MyToys from "../toys/MyToys";
 import AddToy from "../toys/AddToy";
 import Blogs from "../blogs/Blogs";
+import NotFound from "../notFound/NotFound";
 
 const router = createBrowserRouter([
     {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       
       ]
     },
+    {
+      path:"*",
+      element: <NotFound></NotFound>
+    }
   ]);
 
   export default router;
