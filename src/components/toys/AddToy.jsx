@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import useTitle from "../../hooks/useTitle";
+import axios from "axios";
 
 const AddToy = () => {
-  useTitle('AddToy')
+  useTitle("AddToy");
   const [toyPicture, setToyPicture] = useState("");
   const [toyName, setToyName] = useState("");
   const [sellerName, setSellerName] = useState("");
@@ -51,8 +52,8 @@ const AddToy = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Perform toy submission logic here
-    console.log("Toy submitted:", {
+
+    const toy = {
       picture: toyPicture,
       name: toyName,
       sellerName: sellerName,
@@ -62,17 +63,27 @@ const AddToy = () => {
       rating: toyRating,
       availableQuantity: availableQuantity,
       description: toyDescription,
-    });
-    // Clear form fields
-    setToyPicture("");
-    setToyName("");
-    setSellerName("");
-    setSellerEmail("");
-    setSubCategory("");
-    setToyPrice("");
-    setToyRating("");
-    setAvailableQuantity("");
-    setToyDescription("");
+    };
+
+    // Make an HTTP POST request to the API
+    axios
+      .post("http://localhost:5000/toys", toy)
+      .then((response) => {
+        console.log("Toy added:", response.data);
+        // Clear form fields
+        setToyPicture("");
+        setToyName("");
+        setSellerName("");
+        setSellerEmail("");
+        setSubCategory("");
+        setToyPrice("");
+        setToyRating("");
+        setAvailableQuantity("");
+        setToyDescription("");
+      })
+      .catch((error) => {
+        console.error("Failed to add toy:", error);
+      });
   };
 
   return (
@@ -90,6 +101,7 @@ const AddToy = () => {
             value={toyPicture}
             onChange={handleToyPictureChange}
             required
+            defaultValue={'abc'}
           />
         </div>
         <div className="mb-4">
@@ -157,6 +169,7 @@ const AddToy = () => {
             value={toyPrice}
             onChange={handleToyPriceChange}
             required
+            defaultValue={23}
           />
         </div>
         <div className="mb-4">
