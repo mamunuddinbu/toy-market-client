@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -29,7 +29,9 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn bg-white text-yellow-700">Login</a> 
+      
+        
+        <Link to={'/login'} className="btn bg-white text-yellow-700">Login</Link>
       </div> 
       {/* To do: Navbar will be show profile pic instead of login btn if user is logged in */}
     </div>

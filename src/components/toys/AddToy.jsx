@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const AddToy = () => {
-  const [toyPicture, setToyPicture] = useState('');
-  const [toyName, setToyName] = useState('');
-  const [sellerName, setSellerName] = useState('');
-  const [sellerEmail, setSellerEmail] = useState('');
-  const [subCategory, setSubCategory] = useState('');
-  const [toyPrice, setToyPrice] = useState('');
-  const [toyRating, setToyRating] = useState('');
-  const [availableQuantity, setAvailableQuantity] = useState('');
-  const [toyDescription, setToyDescription] = useState('');
+  const [toyPicture, setToyPicture] = useState("");
+  const [toyName, setToyName] = useState("");
+  const [sellerName, setSellerName] = useState("");
+  const [sellerEmail, setSellerEmail] = useState("");
+  const [subCategory, setSubCategory] = useState("");
+  const [toyPrice, setToyPrice] = useState("");
+  const [toyRating, setToyRating] = useState("");
+  const [availableQuantity, setAvailableQuantity] = useState("");
+  const [toyDescription, setToyDescription] = useState("");
 
   const handleToyPictureChange = (e) => {
     setToyPicture(e.target.value);
@@ -50,7 +50,7 @@ const AddToy = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Perform toy submission logic here
-    console.log('Toy submitted:', {
+    console.log("Toy submitted:", {
       picture: toyPicture,
       name: toyName,
       sellerName: sellerName,
@@ -62,15 +62,15 @@ const AddToy = () => {
       description: toyDescription,
     });
     // Clear form fields
-    setToyPicture('');
-    setToyName('');
-    setSellerName('');
-    setSellerEmail('');
-    setSubCategory('');
-    setToyPrice('');
-    setToyRating('');
-    setAvailableQuantity('');
-    setToyDescription('');
+    setToyPicture("");
+    setToyName("");
+    setSellerName("");
+    setSellerEmail("");
+    setSubCategory("");
+    setToyPrice("");
+    setToyRating("");
+    setAvailableQuantity("");
+    setToyDescription("");
   };
 
   return (
