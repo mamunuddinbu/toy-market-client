@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import useTitle from "../../hooks/useTitle";
 
 const AddToy = () => {
+  useTitle('AddToy')
   const [toyPicture, setToyPicture] = useState("");
   const [toyName, setToyName] = useState("");
   const [sellerName, setSellerName] = useState("");

@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 // import img from '../../assets/images/login/login.svg'
 import { useContext } from "react";
 import { AuthContext } from "./AuthProvider";
+import useTitle from "../../hooks/useTitle";
 
 const Login = () => {
+  useTitle('Login')
   const { signIn } = useContext(AuthContext);
 
   const handleLogin = (event) => {
