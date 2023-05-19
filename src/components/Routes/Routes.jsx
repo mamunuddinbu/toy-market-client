@@ -8,6 +8,8 @@ import Blogs from "../blogs/Blogs";
 import NotFound from "../notFound/NotFound";
 import Login from "../auth/Login";
 import SignUp from "../auth/SignUp";
+import AboutUs from "../other/AboutUs";
+import Contact from "../other/Contact";
 
 const router = createBrowserRouter([
     {
@@ -41,6 +43,14 @@ const router = createBrowserRouter([
         {
             path:"/signup",
             element:<SignUp></SignUp>
+        },
+        {
+            path:"/about",
+            element:<AboutUs></AboutUs>
+        },
+        {
+            path:"/contact",
+            element:<Contact></Contact>
         },
       
       ]
