@@ -10,6 +10,7 @@ import Login from "../auth/Login";
 import SignUp from "../auth/SignUp";
 import AboutUs from "../other/AboutUs";
 import Contact from "../other/Contact";
+import PrivateRoute from "../other/PrivateRout";
 
 const router = createBrowserRouter([
     {
@@ -26,11 +27,11 @@ const router = createBrowserRouter([
         },
         {
             path:"/my-toys",
-            element:<MyToys></MyToys>
+            element:<PrivateRoute><MyToys></MyToys></PrivateRoute>
         },
         {
             path:"/add-toy",
-            element:<AddToy></AddToy>
+            element:<PrivateRoute><AddToy></AddToy></PrivateRoute>
         },
         {
             path:"/blogs",

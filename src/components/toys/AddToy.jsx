@@ -98,10 +98,10 @@ const AddToy = () => {
             type="text"
             id="toyPicture"
             className="w-full border border-gray-300 rounded-md p-2"
-            value={toyPicture}
+            defaultValue = "abc"
             onChange={handleToyPictureChange}
             required
-            defaultValue={'abc'}
+           
           />
         </div>
         <div className="mb-4">
@@ -112,9 +112,10 @@ const AddToy = () => {
             type="text"
             id="toyName"
             className="w-full border border-gray-300 rounded-md p-2"
-            value={toyName}
+            defaultValue = "abc"
             onChange={handleToyNameChange}
             required
+           
           />
         </div>
         <div className="mb-4">
@@ -125,7 +126,7 @@ const AddToy = () => {
             type="text"
             id="sellerName"
             className="w-full border border-gray-300 rounded-md p-2"
-            value={sellerName}
+            defaultValue = "abc"
             onChange={handleSellerNameChange}
           />
         </div>
@@ -137,7 +138,7 @@ const AddToy = () => {
             type="email"
             id="sellerEmail"
             className="w-full border border-gray-300 rounded-md p-2"
-            value={sellerEmail}
+            defaultValue = "abc"
             onChange={handleSellerEmailChange}
           />
         </div>
@@ -148,7 +149,7 @@ const AddToy = () => {
           <select
             id="subCategory"
             className="w-full border border-gray-300 rounded-md p-2"
-            value={subCategory}
+            defaultValue = "abc"
             onChange={handleSubCategoryChange}
             required
           >
@@ -166,10 +167,9 @@ const AddToy = () => {
             type="number"
             id="toyPrice"
             className="w-full border border-gray-300 rounded-md p-2"
-            value={toyPrice}
+            defaultValue = "abc"
             onChange={handleToyPriceChange}
             required
-            defaultValue={23}
           />
         </div>
         <div className="mb-4">
@@ -180,7 +180,7 @@ const AddToy = () => {
             type="number"
             id="toyRating"
             className="w-full border border-gray-300 rounded-md p-2"
-            value={toyRating}
+            defaultValue = "abc"
             onChange={handleToyRatingChange}
           />
         </div>
@@ -192,7 +192,7 @@ const AddToy = () => {
             type="number"
             id="availableQuantity"
             className="w-full border border-gray-300 rounded-md p-2"
-            value={availableQuantity}
+            defaultValue = "abc"
             onChange={handleAvailableQuantityChange}
           />
         </div>
@@ -203,7 +203,7 @@ const AddToy = () => {
           <textarea
             id="toyDescription"
             className="w-full border border-gray-300 rounded-md p-2"
-            value={toyDescription}
+            defaultValue = "abc"
             onChange={handleToyDescriptionChange}
             required
           ></textarea>

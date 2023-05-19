@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../../assets/logo.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../auth/AuthProvider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logOut().then(() => {}).catch((error) => { console.log(error.message) });
+  }
+
   return (
     <div className="navbar bg-purple-950 text-yellow-300">
       <div className="navbar-start">
@@ -14,25 +21,32 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link to={'/'}>Home </Link>
-          </li>
-          <li><Link to={'/all-toys'}>AllToys</Link></li>
-          <li>
-            <Link to={'/my-toys'}>My Toys</Link>
+            <Link to={"/"}>Home </Link>
           </li>
           <li>
-            <Link to={'/add-toy'}>AddToy</Link>
+            <Link to={"/all-toys"}>AllToys</Link>
           </li>
           <li>
-            <Link to={'/blogs'}>Blogs</Link>
+            <Link to={"/my-toys"}>My Toys</Link>
           </li>
+          <li>
+            <Link to={"/add-toy"}>AddToy</Link>
+          </li>
+          <li>
+            <Link to={"/blogs"}>Blogs</Link>
+          </li>
+          {user && <li>{user?.email}</li>}
         </ul>
       </div>
       <div className="navbar-end">
-      
-        
-        <Link to={'/login'} className="btn bg-white text-yellow-700">Login</Link>
-      </div> 
+        {user ? (
+          <button onClick={handleLogout} className="btn bg-primary rounded-md">Logout</button>
+        ) : (
+          <Link to={"/login"} className="btn bg-white text-yellow-700">
+            Login
+          </Link>
+        )}
+      </div>
       {/* To do: Navbar will be show profile pic instead of login btn if user is logged in */}
     </div>
   );
