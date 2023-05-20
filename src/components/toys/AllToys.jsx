@@ -27,41 +27,48 @@ const AllToys = () => {
   );
 
   return (
-    <div>
-      <h2>All Toys</h2>
+    <div className="container mx-auto py-8">
+      <h2 className="text-3xl font-bold mb-4">All Toys</h2>
 
-      <div>
+      <div className="mb-4">
         <input
           type="text"
           placeholder="Search by Toy Name"
           value={searchTerm}
           onChange={handleSearchTermChange}
+          className="p-2 border border-gray-300 rounded"
         />
       </div>
 
-      <table>
+      <table className="min-w-full bg-white border border-gray-300">
         <thead>
           <tr>
-            <th>Serial Number</th>
-            <th>Seller</th>
-            <th>Toy Name</th>
-            <th>Sub-category</th>
-            <th>Price</th>
-            <th>Available Quantity</th>
-            <th>View Details</th>
+            <th className="py-2 px-4 border-b">Serial Number</th>
+            <th className="py-2 px-4 border-b">Seller</th>
+            <th className="py-2 px-4 border-b">Toy Name</th>
+            <th className="py-2 px-4 border-b">Sub-category</th>
+            <th className="py-2 px-4 border-b">Price</th>
+            <th className="py-2 px-4 border-b">Available Quantity</th>
+            <th className="py-2 px-4 border-b">View Details</th>
           </tr>
         </thead>
         <tbody>
           {filteredToys.map((toy, index) => (
             <tr key={toy._id}>
-              <td>{index + 1}</td>
-              <td>{toy.sellerName}</td>
-              <td>{toy.name}</td>
-              <td>{toy.subCategory}</td>
-              <td>{toy.price}</td>
-              <td>{toy.availableQuantity}</td>
-              <td>
-                <Link to={`/details/${toy._id}`}>View Details</Link>
+              <td className="py-2 px-4 border-b">{index + 1} </td>
+              <td className="py-2 px-4 border-b">{toy.sellerName}</td>
+              <td className="py-2 px-4 border-b">{toy.name}</td>
+              <td className="py-2 px-4 border-b">{toy.subCategory}</td>
+              <td className="py-2 px-4 border-b">{toy.price}</td>
+              <td className="py-2 px-4 border-b">{toy.availableQuantity}</td>
+              <td className="py-2 px-4 border-b">{toy._id}</td>
+              <td className="py-2 px-4 border-b">
+                <Link
+                  to={`/details/${toy._id}`}
+                  className="text-blue-500 hover:underline"
+                >
+                  View Details
+                </Link>
               </td>
             </tr>
           ))}

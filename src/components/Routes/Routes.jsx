@@ -55,8 +55,10 @@ const router = createBrowserRouter([
             element:<Contact></Contact>
         },
         {
-            path:"/details/:_id",
-            element:<Details></Details>
+            path:"/details/:id",
+            element:<PrivateRoute><Details></Details></PrivateRoute>,
+            loader:({params})=>fetch(`http://localhost:5000/toys/${params.id}`)
+
         },
       
       ]

@@ -63,7 +63,7 @@ const AddToy = () => {
     const toy = {
       picture: toyPicture,
       name: toyName,
-      sellerName: sellerName,
+      sellerName: seller,
       sellerEmail: sellerEmail,
       subCategory: subCategory,
       price: toyPrice,
@@ -90,6 +90,7 @@ const AddToy = () => {
         setAvailableQuantity("");
         setToyDescription("");
         e.target.reset();
+       
         
       })
       .catch((error) => {
