@@ -36,6 +36,7 @@ const Navbar = () => {
             <Link to={"/blogs"}>Blogs</Link>
           </li>
           {user && <li>{user?.email}</li>}
+          
         </ul>
       </div>
       <div className="navbar-end">

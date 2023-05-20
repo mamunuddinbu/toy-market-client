@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import useTitle from "../../hooks/useTitle";
 import axios from "axios";
+import { AuthContext } from "../auth/AuthProvider";
 
 const AddToy = () => {
   useTitle("AddToy");
+
+  const { user } = useContext(AuthContext);
+  const email = user.email;
+  const seller = user?.displayName;
+
   const [toyPicture, setToyPicture] = useState("");
   const [toyName, setToyName] = useState("");
   const [sellerName, setSellerName] = useState("");
@@ -90,7 +96,7 @@ const AddToy = () => {
     <div className="container mx-auto py-10">
       <h2 className="text-3xl font-bold mb-6">Add a Toy</h2>
       <form onSubmit={handleSubmit}>
-        <div className="mb-4">
+      <div className="mb-4">
           <label htmlFor="toyPicture" className="block font-bold mb-1">
             Toy Picture URL
           </label>
@@ -126,7 +132,7 @@ const AddToy = () => {
             type="text"
             id="sellerName"
             className="w-full border border-gray-300 rounded-md p-2"
-            defaultValue = "abc"
+            defaultValue = {seller}
             onChange={handleSellerNameChange}
           />
         </div>
@@ -138,7 +144,7 @@ const AddToy = () => {
             type="email"
             id="sellerEmail"
             className="w-full border border-gray-300 rounded-md p-2"
-            defaultValue = "abc"
+            defaultValue = {email}
             onChange={handleSellerEmailChange}
           />
         </div>
@@ -203,12 +209,13 @@ const AddToy = () => {
           <textarea
             id="toyDescription"
             className="w-full border border-gray-300 rounded-md p-2"
-            defaultValue = "abc"
+            defaultValue = "This is the best toy to learn..."
             onChange={handleToyDescriptionChange}
             required
           ></textarea>
         </div>
         <button
+          
           type="submit"
           className="bg-yellow-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600"
         >
