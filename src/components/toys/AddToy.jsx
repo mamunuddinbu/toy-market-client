@@ -64,7 +64,7 @@ const AddToy = () => {
       picture: toyPicture,
       name: toyName,
       sellerName: seller,
-      sellerEmail: sellerEmail,
+      sellerEmail: email,
       subCategory: subCategory,
       price: toyPrice,
       rating: toyRating,

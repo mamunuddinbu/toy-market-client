@@ -5,7 +5,7 @@ import { AuthContext } from "../auth/AuthProvider";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-
+console.log(user);
   const handleLogout = () => {
     logOut().then(() => {}).catch((error) => { console.log(error.message) });
   }
@@ -36,6 +36,7 @@ const Navbar = () => {
             <Link to={"/blogs"}>Blogs</Link>
           </li>
           {user && <li>{user?.email}</li>}
+          {user && <li><img src={user?.photoURl} alt=""  /></li>}
           
         </ul>
       </div>

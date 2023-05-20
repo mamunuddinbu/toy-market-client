@@ -40,16 +40,16 @@ const AllToys = () => {
         />
       </div>
 
-      <table className="min-w-full bg-white border border-gray-300">
+      <table className="min-w-full bg-white border border-gray-400">
         <thead>
           <tr>
-            <th className="py-2 px-4 border-b">Serial Number</th>
-            <th className="py-2 px-4 border-b">Seller</th>
-            <th className="py-2 px-4 border-b">Toy Name</th>
-            <th className="py-2 px-4 border-b">Sub-category</th>
-            <th className="py-2 px-4 border-b">Price</th>
-            <th className="py-2 px-4 border-b">Available Quantity</th>
-            <th className="py-2 px-4 border-b">View Details</th>
+            <th className="py-2 mx-4 border-b">SL NO</th>
+            <th className="py-2 mx-4 border-b">Seller</th>
+            <th className="py-2 mx-4 border-b">Toy Name</th>
+            <th className="py-2 mx-4 border-b">Sub-category</th>
+            <th className="py-2 mx-4 border-b">Price</th>
+            <th className="py-2 mx-4 border-b">Available <br /> Quantity</th>
+            <th className="py-2 mx-4 border-b">View Details</th>
           </tr>
         </thead>
         <tbody>
@@ -61,11 +61,10 @@ const AllToys = () => {
               <td className="py-2 px-4 border-b">{toy.subCategory}</td>
               <td className="py-2 px-4 border-b">{toy.price}</td>
               <td className="py-2 px-4 border-b">{toy.availableQuantity}</td>
-              <td className="py-2 px-4 border-b">{toy._id}</td>
               <td className="py-2 px-4 border-b">
                 <Link
                   to={`/details/${toy._id}`}
-                  className="text-blue-500 hover:underline"
+                  className="text-blue-500 hover:underline "
                 >
                   View Details
                 </Link>

@@ -12,6 +12,7 @@ import AboutUs from "../other/AboutUs";
 import Contact from "../other/Contact";
 import PrivateRoute from "../other/PrivateRout";
 import Details from "../toys/Details";
+import Update from "../other/Update";
 
 const router = createBrowserRouter([
     {
@@ -55,11 +56,22 @@ const router = createBrowserRouter([
             element:<Contact></Contact>
         },
         {
+            path:"/update/:id",
+            element:<Update></Update>
+        },
+        {
             path:"/details/:id",
             element:<PrivateRoute><Details></Details></PrivateRoute>,
-            loader:({params})=>fetch(`http://localhost:5000/toys/${params.id}`)
+            loader:({params})=>fetch(`http://localhost:5000/toys/id/${params.id}`)
 
         },
+      
+        // {
+        //     path:"/my-toys",
+        //     element:<PrivateRoute><MyToys></MyToys></PrivateRoute>,
+        //     loader:({params})=>fetch(`http://localhost:5000/toys/email/${params.sellEmail}`)
+
+        // },
       
       ]
     },

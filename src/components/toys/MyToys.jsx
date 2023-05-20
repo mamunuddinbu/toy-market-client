@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useTitle from '../../hooks/useTitle';
+import { AuthContext } from '../auth/AuthProvider';
 
 const MyToys = () => {
   useTitle('My Toys');
+
+  const {user} = useContext(AuthContext)
+ 
 
   const [toys, setToys] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,15 +15,16 @@ const MyToys = () => {
   useEffect(() => {
     const fetchToys = async () => {
       // Fetch toys from the server for the logged-in user
-      const response = await fetch('http://localhost:5000/toys'); // Update the URL accordingly
+      const response = await fetch(`http://localhost:5000/toys/${user?.email}`); // Update the URL accordingly
       const data = await response.json();
       setToys(data);
       setLoading(false);
     };
 
     fetchToys();
-  }, []);
+  }, [user?.email]);
 
+console.log(toys);
   const handleDelete = async (id) => {
     // Confirm delete action
     const confirmed = window.confirm('Are you sure you want to delete this toy?');
