@@ -1,30 +1,86 @@
-import React, { useEffect, useState } from 'react';
-import useTitle from '../../hooks/useTitle';
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../auth/AuthProvider";
 
 const AllToys = () => {
-  useTitle('AllToy');
-
   const [toys, setToys] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  const {user}=useContext(AuthContext)
 
   useEffect(() => {
-    fetch('https://toy-server-rho.vercel.app/toys')
-      .then((res) => res.json())
-      .then((data) => setToys(data))
-      .catch((error) => console.log(error));
+    fetchToys();
   }, []);
 
+  const fetchToys = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/toys");
+      setToys(response.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Failed to fetch toys:", error);
+    }
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredToys = toys.filter((toy) =>
+    toy.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div>
-      <h1 className="text-3xl font-bold">All Toys</h1>
-      <div className="grid grid-cols-3 gap-4 mt-4">
-        {toys.map((toy) => (
-          <div key={toy.id} className="p-4 bg-white rounded shadow">
-            <h2 className="text-lg font-bold">{toy.name}</h2>
-            <p className="text-gray-600">{toy.description}</p>
-            <p className="mt-2 font-bold">${toy.price}</p>
+    <div className="container mx-auto py-10">
+      <h2 className="text-3xl font-bold mb-6">All Toys</h2>
+      {isLoading ? (
+        <p>Loading toys...</p>
+      ) : (
+        <>
+          <div className="mb-4">
+            <label htmlFor="search" className="block font-bold mb-1">
+              Search by Toy Name
+            </label>
+            <input
+              type="text"
+              id="search"
+              className="w-full border border-gray-300 rounded-md p-2"
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
           </div>
-        ))}
-      </div>
+          <table className="w-full border border-gray-300">
+            <thead>
+              <tr>
+                <th className="border border-gray-300 px-4 py-2">Seller</th>
+                <th className="border border-gray-300 px-4 py-2">Toy Name</th>
+                <th className="border border-gray-300 px-4 py-2">Sub-category</th>
+                <th className="border border-gray-300 px-4 py-2">Price</th>
+                <th className="border border-gray-300 px-4 py-2">Available Quantity</th>
+                <th className="border border-gray-300 px-4 py-2">View Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredToys.map((toy) => (
+                <tr key={toy._id}>
+                  <td className="border border-gray-300 px-4 py-2">{toy.sellerName}</td>
+                  <td className="border border-gray-300 px-4 py-2">{toy.name}</td>
+                  <td className="border border-gray-300 px-4 py-2">{toy.subCategory}</td>
+                  <td className="border border-gray-300 px-4 py-2">{toy.price}</td>
+                  <td className="border border-gray-300 px-4 py-2">{toy.availableQuantity}</td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    <Link to={user ? `/details/${toy._id}` : "/login"}>
+                      View Details
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      )}
     </div>
   );
 };
