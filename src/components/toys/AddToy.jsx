@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import useTitle from "../../hooks/useTitle";
 import axios from "axios";
 import { AuthContext } from "../auth/AuthProvider";
+import { useLocation } from "react-router-dom";
 
 const AddToy = () => {
   useTitle("AddToy");
@@ -69,6 +70,8 @@ const AddToy = () => {
       rating: toyRating,
       availableQuantity: availableQuantity,
       description: toyDescription,
+
+      
     };
 
     // Make an HTTP POST request to the API
@@ -86,6 +89,8 @@ const AddToy = () => {
         setToyRating("");
         setAvailableQuantity("");
         setToyDescription("");
+        e.target.reset();
+        
       })
       .catch((error) => {
         console.error("Failed to add toy:", error);

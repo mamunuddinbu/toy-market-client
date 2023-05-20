@@ -11,6 +11,7 @@ import SignUp from "../auth/SignUp";
 import AboutUs from "../other/AboutUs";
 import Contact from "../other/Contact";
 import PrivateRoute from "../other/PrivateRout";
+import Details from "../toys/Details";
 
 const router = createBrowserRouter([
     {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
         {
             path:"/contact",
             element:<Contact></Contact>
+        },
+        {
+            path:"/details/:_id",
+            element:<Details></Details>
         },
       
       ]

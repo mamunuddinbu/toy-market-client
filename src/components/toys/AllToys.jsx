@@ -1,30 +1,24 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../auth/AuthProvider";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import useTitle from '../../hooks/useTitle';
 
 const AllToys = () => {
-  const [toys, setToys] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  useTitle('All Toys');
 
-  const {user}=useContext(AuthContext)
+  const [toys, setToys] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    fetchToys();
+    const fetchData = async () => {
+      const response = await fetch('https://toy-server-rho.vercel.app/toys?limit=20');
+      const data = await response.json();
+      setToys(data);
+    };
+
+    fetchData();
   }, []);
 
-  const fetchToys = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/toys");
-      setToys(response.data);
-      setIsLoading(false);
-    } catch (error) {
-      console.error("Failed to fetch toys:", error);
-    }
-  };
-
-  const handleSearchChange = (e) => {
+  const handleSearchTermChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
@@ -33,54 +27,46 @@ const AllToys = () => {
   );
 
   return (
-    <div className="container mx-auto py-10">
-      <h2 className="text-3xl font-bold mb-6">All Toys</h2>
-      {isLoading ? (
-        <p>Loading toys...</p>
-      ) : (
-        <>
-          <div className="mb-4">
-            <label htmlFor="search" className="block font-bold mb-1">
-              Search by Toy Name
-            </label>
-            <input
-              type="text"
-              id="search"
-              className="w-full border border-gray-300 rounded-md p-2"
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-          </div>
-          <table className="w-full border border-gray-300">
-            <thead>
-              <tr>
-                <th className="border border-gray-300 px-4 py-2">Seller</th>
-                <th className="border border-gray-300 px-4 py-2">Toy Name</th>
-                <th className="border border-gray-300 px-4 py-2">Sub-category</th>
-                <th className="border border-gray-300 px-4 py-2">Price</th>
-                <th className="border border-gray-300 px-4 py-2">Available Quantity</th>
-                <th className="border border-gray-300 px-4 py-2">View Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredToys.map((toy) => (
-                <tr key={toy._id}>
-                  <td className="border border-gray-300 px-4 py-2">{toy.sellerName}</td>
-                  <td className="border border-gray-300 px-4 py-2">{toy.name}</td>
-                  <td className="border border-gray-300 px-4 py-2">{toy.subCategory}</td>
-                  <td className="border border-gray-300 px-4 py-2">{toy.price}</td>
-                  <td className="border border-gray-300 px-4 py-2">{toy.availableQuantity}</td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    <Link to={user ? `/details/${toy._id}` : "/login"}>
-                      View Details
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </>
-      )}
+    <div>
+      <h2>All Toys</h2>
+
+      <div>
+        <input
+          type="text"
+          placeholder="Search by Toy Name"
+          value={searchTerm}
+          onChange={handleSearchTermChange}
+        />
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Serial Number</th>
+            <th>Seller</th>
+            <th>Toy Name</th>
+            <th>Sub-category</th>
+            <th>Price</th>
+            <th>Available Quantity</th>
+            <th>View Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredToys.map((toy, index) => (
+            <tr key={toy._id}>
+              <td>{index + 1}</td>
+              <td>{toy.sellerName}</td>
+              <td>{toy.name}</td>
+              <td>{toy.subCategory}</td>
+              <td>{toy.price}</td>
+              <td>{toy.availableQuantity}</td>
+              <td>
+                <Link to={`/details/${toy._id}`}>View Details</Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

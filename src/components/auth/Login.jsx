@@ -2,10 +2,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./AuthProvider";
 import useTitle from "../../hooks/useTitle";
+import { GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
   useTitle('Login')
-  const { signIn } = useContext(AuthContext);
+  const { signIn, googleLoginProvider } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || '/';
@@ -20,10 +21,28 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        navigate(from || "/", { replace: true });
+        navigate(from, { replace: true });
       })
       .catch((error) => console.log(error));
   };
+
+  //////////////////////////////////
+
+  const googleProvider = new GoogleAuthProvider();
+  const handleGoogleLogin = () => {
+    googleLoginProvider(googleProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate(from, { replace: true });
+        
+      })
+      .catch((error) => {
+        console.error(error);
+        // setError(error.message);
+      });
+  };
+  ///////////////////////////////////////
 
   return (
     <div className="hero min-h-screen bg-base-200">
@@ -62,8 +81,9 @@ const Login = () => {
               <input className="btn btn-primary" type="submit" value="Login" />
             </div>
           </form>
+          <button onClick={handleGoogleLogin} className="btn">Login with GOOGLE</button>
           <p className="my-4 text-center">
-            New to Car Doctors{" "}
+            New to Toy Market{" "}
             <Link className="text-orange-600 font-bold" to="/signup">
               Sign Up
             </Link>{" "}
