@@ -1,20 +1,20 @@
 import { Link } from "react-router-dom";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "./AuthProvider";
 import useTitle from "../../hooks/useTitle";
 
 const SignUp = () => {
-  useTitle('SignUp')
+  useTitle("SignUp");
   const { createUser } = useContext(AuthContext);
-
+  const [error, setError] = useState("");
   const handleSignUp = (event) => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    const photoUrl = form.photoUrl.value;     //to-do
+    const photoUrl = form.photoUrl.value; //to-do
     console.log(name, email, password);
 
     createUser(email, password)
@@ -22,7 +22,10 @@ const SignUp = () => {
         const user = result.user;
         console.log("created user", user);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.error(error);
+        setError(error.message);
+      });
   };
 
   return (
@@ -69,7 +72,7 @@ const SignUp = () => {
                 <span className="label-text">Confirm Password</span>
               </label>
               <input
-                type="text"
+                type="password"
                 name="password"
                 placeholder="password"
                 className="input input-bordered"
@@ -88,6 +91,8 @@ const SignUp = () => {
               />
             </div>
           </form>
+          {error && <p className="text-red-500 mb-4">{error}</p>}
+
           <p className="my-4 text-center">
             Already Have an Account?{" "}
             <Link className="text-orange-600 font-bold" to="/login">

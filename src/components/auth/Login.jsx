@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "./AuthProvider";
 import useTitle from "../../hooks/useTitle";
 import { GoogleAuthProvider } from "firebase/auth";
@@ -10,7 +10,8 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || '/';
-  
+  const [error, setError] = useState('');
+
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -23,7 +24,10 @@ const Login = () => {
         console.log(user);
         navigate(from, { replace: true });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.error(error);
+        setError(error.message);
+      });
   };
 
   //////////////////////////////////
@@ -35,11 +39,10 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         navigate(from, { replace: true });
-        
       })
       .catch((error) => {
         console.error(error);
-        // setError(error.message);
+        setError(error);
       });
   };
   ///////////////////////////////////////
@@ -49,6 +52,7 @@ const Login = () => {
       <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
         <div className="card-body">
           <h1 className="text-3xl text-center font-bold">Login</h1>
+          {error && <p className="text-red-500 mb-4">{error}</p>}
           <form onSubmit={handleLogin}>
             <div className="form-control">
               <label className="label">
@@ -66,7 +70,7 @@ const Login = () => {
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="text"
+                type="password"
                 name="password"
                 placeholder="password"
                 className="input input-bordered"
