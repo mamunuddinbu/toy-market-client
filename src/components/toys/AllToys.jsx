@@ -59,8 +59,8 @@ const AllToys = () => {
               <td className="py-2 px-4 border-b">{toy.sellerName}</td>
               <td className="py-2 px-4 border-b">{toy.name}</td>
               <td className="py-2 px-4 border-b">{toy.subCategory}</td>
-              <td className="py-2 px-4 border-b">{toy.price}</td>
-              <td className="py-2 px-4 border-b">{toy.availableQuantity}</td>
+              <td className="py-2 px-4 border-b">${toy.price}</td>
+              <td className="py-2 px-4 border-b">{toy.availableQuantity}Ps</td>
               <td className="py-2 px-4 border-b">
                 <Link
                   to={`/details/${toy._id}`}

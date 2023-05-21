@@ -1,0 +1,49 @@
+# Toy Marketplace - Client-Side
+
+Welcome to the Toy Marketplace client-side repository! This is the front-end part of the Toy Marketplace project, where users can explore and interact with a wide variety of toys.
+
+## Project Description
+
+Toy Marketplace is an online platform that allows users to browse and purchase various toys. The client-side is built using React, providing a user-friendly interface to navigate through different sections of the application.
+
+## Key Features
+
+- **Interactive User Interface**: The client-side of Toy Marketplace offers a visually appealing and intuitive user interface. Users can easily explore different toys, search for specific items, and view details about each toy.
+
+- **Authentication and Authorization**: The application supports user authentication, allowing users to create accounts, log in, and log out. Certain actions, such as adding toys to the marketplace or accessing toy details, require user authentication.
+
+- **Shop by Category**: The "Shop by Category" feature enables users to browse toys based on different categories and sub-categories. This helps users find toys of their interest more efficiently.
+
+- **Add and Manage Toys**: Authenticated users have the ability to add new toys to the marketplace. They can provide details such as toy name, price, quantity, and upload an image. Users can also manage their own toys, edit their details, and delete them if necessary.
+
+- **Responsive Design**: The client-side is built with a responsive design approach, ensuring that the application is accessible and user-friendly across various devices and screen sizes.
+
+## Live Link
+
+You can access the live version of the Toy Marketplace client-side at [Toy Marketplace Live](https://toymarketplace-1d816.web.app).
+
+## Getting Started
+
+To run the client-side code locally, follow these steps:
+
+1. Clone the repository: `git clone <repository-url>`
+2. Navigate to the project directory: `cd toy-marketplace-client`
+3. Install the dependencies: `npm install`
+4. Start the development server: `npm start`
+5. Open your browser and visit `http://localhost:3000` to see the application running locally.
+
+## Technologies Used
+
+- React
+- React Router
+- Axios
+- Firebase Authentication
+- Firebase Hosting
+
+## Contributing
+
+Contributions to the Toy Marketplace client-side are welcome! If you find any bugs, have suggestions for improvements, or would like to add new features, feel free to open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
