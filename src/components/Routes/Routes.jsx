@@ -62,14 +62,14 @@ const router = createBrowserRouter([
         {
             path:"/details/:id",
             element:<PrivateRoute><Details></Details></PrivateRoute>,
-            loader:({params})=>fetch(`http://localhost:5000/toys/details/${params.id}`)
+            loader:({params})=>fetch(`https://toy-server-rho.vercel.app/toys/details/${params.id}`)
 
         },
       
         // {
         //     path:"/my-toys",
         //     element:<PrivateRoute><MyToys></MyToys></PrivateRoute>,
-        //     loader:({params})=>fetch(`http://localhost:5000/toys/email/${params.sellEmail}`)
+        //     loader:({params})=>fetch(`https://toy-server-rho.vercel.app/toys/email/${params.sellEmail}`)
 
         // },
       

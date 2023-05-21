@@ -14,7 +14,7 @@ const MyToys = () => {
 
   useEffect(() => {
     const fetchToys = async () => {
-      const response = await fetch(`http://localhost:5000/toys/email/${user?.email}`);
+      const response = await fetch(`https://toy-server-rho.vercel.app/toys/${user?.email}`);
       const data = await response.json();
 
       const sortedToys = data.sort((a, b) => {
@@ -36,7 +36,7 @@ const MyToys = () => {
     const confirmed = window.confirm('Are you sure you want to delete this toy?');
     if (!confirmed) return;
 
-    const response = await fetch(`http://localhost:5000/toys/${id}`, {
+    const response = await fetch(`https://toy-server-rho.vercel.app/toys/${id}`, {
       method: 'DELETE',
     });
 

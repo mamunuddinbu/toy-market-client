@@ -76,7 +76,7 @@ const AddToy = () => {
 
     // Make an HTTP POST request to the API
     axios
-      .post("http://localhost:5000/toys", toy)
+      .post("https://toy-server-rho.vercel.app/toys", toy)
       .then((response) => {
         console.log("Toy added:", response.data);
         // Clear form fields

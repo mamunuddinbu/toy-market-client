@@ -13,7 +13,7 @@ const Update = () => {
 
   useEffect(() => {
     const fetchToyDetails = async () => {
-      const response = await fetch(`http://localhost:5000/toys/id/${id}`);
+      const response = await fetch(`https://toy-server-rho.vercel.app/toys/id/${id}`);
       const data = await response.json();
       setToy(data);
       setLoading(false);
@@ -29,7 +29,7 @@ const Update = () => {
       detailDescription: description,
     };
 
-    const response = await fetch(`http://localhost:5000/toys/update/id/${id}`, {
+    const response = await fetch(`https://toy-server-rho.vercel.app/toys/update/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
