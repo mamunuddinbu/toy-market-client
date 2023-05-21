@@ -6,72 +6,101 @@ import { AuthContext } from '../auth/AuthProvider';
 const MyToys = () => {
   useTitle('My Toys');
 
-  const {user} = useContext(AuthContext)
- 
+  const { user } = useContext(AuthContext);
 
   const [toys, setToys] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [sortOrder, setSortOrder] = useState('asc');
 
   useEffect(() => {
     const fetchToys = async () => {
-      // Fetch toys from the server for the logged-in user
-      const response = await fetch(`http://localhost:5000/toys/email/${user?.email}`); // Update the URL accordingly
+      const response = await fetch(`http://localhost:5000/toys/email/${user?.email}`);
       const data = await response.json();
-      setToys(data);
+
+      const sortedToys = data.sort((a, b) => {
+        if (sortOrder === 'asc') {
+          return a.price - b.price;
+        } else {
+          return b.price - a.price;
+        }
+      });
+
+      setToys(sortedToys);
       setLoading(false);
     };
 
     fetchToys();
-  }, [user?.email]);
+  }, [user?.email, sortOrder]);
 
-console.log(toys);
   const handleDelete = async (id) => {
-    // Confirm delete action
     const confirmed = window.confirm('Are you sure you want to delete this toy?');
     if (!confirmed) return;
 
-    // Delete the toy from the server
     const response = await fetch(`http://localhost:5000/toys/${id}`, {
       method: 'DELETE',
-    }); // Update the URL accordingly
+    });
 
     if (response.ok) {
-      // Remove the deleted toy from the list
       setToys((prevToys) => prevToys.filter((toy) => toy._id !== id));
     }
   };
 
+  const handleSort = () => {
+    const sortedToys = [...toys].sort((a, b) => {
+      if (sortOrder === 'asc') {
+        return a.price - b.price;
+      } else {
+        return b.price - a.price;
+      }
+    });
+    setToys(sortedToys);
+    setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+  };
+
   return (
-    <div>
-      <h2>My Toys</h2>
+    <div className='my-12'>
+      <h2 className="text-2xl font-bold mb-4">
+        My Toys
+        <button
+          className="ml-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded"
+          onClick={handleSort}
+        >
+          Sort by Price {sortOrder === 'asc' ? '▲' : '▼'}
+        </button>
+      </h2>
 
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <table>
+        <table className="table w-full">
           <thead>
             <tr>
-              <th>Serial Number</th>
-              <th>Toy Name</th>
-              <th>Price</th>
-              <th>Available Quantity</th>
-              <th>Detail Description</th>
-              <th>Actions</th>
+              <th className="px-4 py-2">Serial Number</th>
+              <th className="px-4 py-2">Toy Name</th>
+              <th className="px-4 py-2">Price</th>
+              <th className="px-4 py-2">Available Quantity</th>
+              <th className="px-4 py-2">Detail Description</th>
+              <th className="px-4 py-2">Actions</th>
             </tr>
           </thead>
           <tbody>
             {toys.map((toy, index) => (
               <tr key={toy._id}>
-                <td>{index + 1}</td>
-                <td>{toy.name}</td>
-                <td>{toy.price}</td>
-                <td>{toy.availableQuantity}</td>
-                <td>{toy.detailDescription}</td>
-                <td>
-                  <button>
+                <td className="border px-4 py-2">{index + 1}</td>
+                <td className="border px-4 py-2">{toy.name}</td>
+                <td className="border px-4 py-2">{toy.price}</td>
+                <td className="border px-4 py-2">{toy.availableQuantity}</td>
+                <td className="border px-4 py-2">{toy.detailDescription}</td>
+                <td className="border px-4 py-2">
+                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
                     <Link to={`/update/${toy._id}`}>Update</Link>
                   </button>
-                  <button onClick={() => handleDelete(toy._id)}>Delete</button>
+                  <button
+                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={() => handleDelete(toy._id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
