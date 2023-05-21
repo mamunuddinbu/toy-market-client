@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Update = () => {
   const { id } = useParams();
@@ -13,7 +13,7 @@ const Update = () => {
 
   useEffect(() => {
     const fetchToyDetails = async () => {
-      const response = await fetch(`http://localhost:5000/toys/${id}`); // Update the URL accordingly
+      const response = await fetch(`http://localhost:5000/toys/id/${id}`);
       const data = await response.json();
       setToy(data);
       setLoading(false);
@@ -29,13 +29,13 @@ const Update = () => {
       detailDescription: description,
     };
 
-    const response = await fetch(`http://localhost:5000/toys/${id}`, {
+    const response = await fetch(`http://localhost:5000/toys/update/id/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(updatedToy),
-    }); // Update the URL accordingly
+    });
 
     if (response.ok) {
       // Redirect to My Toys page after successful update

@@ -15,7 +15,7 @@ const MyToys = () => {
   useEffect(() => {
     const fetchToys = async () => {
       // Fetch toys from the server for the logged-in user
-      const response = await fetch(`http://localhost:5000/toys/${user?.email}`); // Update the URL accordingly
+      const response = await fetch(`http://localhost:5000/toys/email/${user?.email}`); // Update the URL accordingly
       const data = await response.json();
       setToys(data);
       setLoading(false);
